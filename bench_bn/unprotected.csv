@@ -1,0 +1,9 @@
+Function,Unprotected
+bn_addn, 20
+bn_copy, 20
+bn_eq, 20
+bn_muln, 80
+bn_set0, 20
+bn_sqrn, 80
+bn_subn, 20
+bn_test0, 20

@@ -1,0 +1,9 @@
+Function,Unprotected,Protected,Overhead (%)
+bn_addn,20,40,100.0
+bn_copy,20,40,100.0
+bn_eq,20,40,100.0
+bn_muln,80,100,25.0
+bn_set0,20,40,100.0
+bn_sqrn,80,100,25.0
+bn_subn,20,40,100.0
+bn_test0,20,60,200.0
