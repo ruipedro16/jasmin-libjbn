@@ -69,9 +69,9 @@ export fn fp_expm_noct(#transient reg u64 rp ap bp) {
 
     #secret stack u64[NLIMBS] _a _b _r;
     reg ptr u64[NLIMBS] a b r;
-    #public stack u64 _rp;
+    // #public stack u64 _rp;
 
-    _rp = rp;
+    // _rp = rp;
 
     _a = __bn_load(ap); 
     a = _a;
@@ -82,40 +82,27 @@ export fn fp_expm_noct(#transient reg u64 rp ap bp) {
     r = _r;
     r = _fp_exp(a, b, r);
 
-    _ = #init_msf();  // mesmo problema do fp_inv
-    rp = _rp;
+    // rp = _rp;
+    //__bn_store(rp, r);
     __bn_store(rp, r);
 }
 
-
 export fn fp_inv(#transient reg u64 rp ap) {
-    // rp: #transient = (public, secret )
     _ = #init_msf();
-    // depois do LFENCE rp devia ser (public, public)
 
     #secret stack u64[NLIMBS] _a _r;
     reg ptr u64[NLIMBS] a r;
-    #secret stack u64 _rp;
+    // #public stack u64 _rp;
 
-    _rp = rp;
+    /// _rp = rp;
     _a = __bn_load(ap); 
     a = _a;
     r = _r;
 
-    r = __fp_inv(a, r); // r é um #secret stack u64[NLIMBS]
-    _ = #init_msf(); // Nao devia ser preciso este LFENCE por causa do LFENCE de cima (?)
-    rp = _rp; // para isto dar rp tem de ter (public, public) mas (sem o LFENCE da linha acima) é (public, secret) 
-              // acho que devia funcionar sem esta linha
-              // nao percebi esta linha
-    __bn_store(rp, r); // [rp] = r
-                       // rp : public, r : secret
-
-    /*
-     * O erro é
-     * "rp has type (n: public, s: secret) but should be at most (n: public, s: public)" 
-     * Se tirar o rp = _rp;, passa a funcionar
-     */
- }
+    r = __fp_inv(a, r);
+    // rp = _rp;
+    __bn_store(rp, r);
+}
 
 export fn fp_toM(#transient reg u64 rp ap) {
     _ = #init_msf();

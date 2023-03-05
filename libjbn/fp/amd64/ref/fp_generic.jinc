@@ -176,6 +176,7 @@ fn _fp_exp(reg ptr u64[NLIMBS] a _b r) -> reg ptr u64[NLIMBS] {
     reg ptr u64[NLIMBS] glob_oneMp;
 
     reg bool cond;
+    #msf reg u64 ms;
 
     x = _x;
     glob_oneMp = glob_oneM;
@@ -188,28 +189,31 @@ fn _fp_exp(reg ptr u64[NLIMBS] a _b r) -> reg ptr u64[NLIMBS] {
     bb = _b;
     rr = r;
     
-
+    // ms = #init_msf(); // calls destroy msf variables
     for j = 0 to NLIMBS {
         b = bb;
         t = b[(int) j];
         k = 64;
-        /*
-        while (k != 0) {
-      ss = k;
-      _, cf, _, _, _, t = #SHR(t, 1);
-      if (cf) {
-        r = rr;
-        x = _x; //w
-        r = _fp_mulU(r, x);
-        _x = x; //w
-        rr = r;
-      }
-      x = _x; //w
-      x = _fp_sqrU(x);
-      _x = x; //w
-      k = ss;
-      k -= 1;
-    }
+        /* 
+        while { cond = (k != 0); } (cond) {
+            ss = k;
+
+            
+            _, cf, _, _, _, t = #SHR(t, 1);
+            if (cf) {
+                ms = #set_msf(cf, ms);
+                r = rr;
+                x = _x; //w
+                r = _fp_mulU(r, x);
+                _x = x; //w
+                rr = r;
+            }
+            x = _x; //w
+            x = _fp_sqrU(x);
+            _x = x; //w
+            k = ss;
+            k -= 1;
+        }
         */
     }
     r = rr;
