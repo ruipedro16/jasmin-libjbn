@@ -6,10 +6,10 @@ cp -r ../libjbn .
 cp -r ../libjbn_unprotected .
 
 # Compile the protected version of libjbn
-jasminc -checkSCT libjbn/bn/amd64/ref/bn_generic_export.jinc 2> /dev/null || (echo "Not SCT" ; exit 1)
-jasminc libjbn/bn/amd64/ref/bn_generic_export.jinc -o bn_generic_export.s
+# jasminc -checkSCT libjbn/fp/amd64/ref/fp_generic_export.jinc 2> /dev/null || (echo "Not SCT" ; exit 1)
+jasminc libjbn/fp/amd64/ref/fp_generic_export.jinc -o fp_generic_export.s 2> /dev/null
 
-gcc bn_generic.c bn_generic_export.s
+gcc fp_generic.c fp_generic_export.s
 
 # Flush the cache
 echo 3 > /proc/sys/vm/drop_caches # Nao sei se e suposto (?) # Must run as sudo
@@ -22,9 +22,9 @@ mkdir -p csv_protected
 mv *.csv csv_protected
 
 # Compile the unprotected version of libjbn
-jasminc libjbn_unprotected/bn/amd64/ref/bn_generic_export.jinc -o bn_generic_export.s
+jasminc libjbn_unprotected/fp/amd64/ref/fp_generic_export.jinc -o fp_generic_export.s 2> /dev/null
 
-gcc bn_generic.c bn_generic_export.s
+gcc fp_generic.c fp_generic_export.s
 
 # Flush the cache
 echo 3 > /proc/sys/vm/drop_caches # Nao sei se e suposto (?) # Must run as sudo

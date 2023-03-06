@@ -6,4 +6,4 @@ bn_muln, 100
 bn_set0, 40
 bn_sqrn, 100
 bn_subn, 40
-bn_test0, 60
+bn_test0, 40

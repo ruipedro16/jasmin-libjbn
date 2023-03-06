@@ -189,12 +189,12 @@ fn _fp_exp(reg ptr u64[NLIMBS] a _b r) -> reg ptr u64[NLIMBS] {
     bb = _b;
     rr = r;
     
-    // ms = #init_msf(); // calls destroy msf variables
+    ms = #init_msf(); // calls destroy msf variables
     for j = 0 to NLIMBS {
         b = bb;
         t = b[(int) j];
         k = 64;
-        /* 
+        /*
         while { cond = (k != 0); } (cond) {
             ss = k;
 

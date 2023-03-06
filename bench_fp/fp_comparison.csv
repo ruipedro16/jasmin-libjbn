@@ -1,0 +1,9 @@
+Function,Unprotected,Protected,Overhead (%)
+fp_add,40,60,50.0
+fp_expm_noct,66700,60,-99.91
+fp_fromM,100,140,40.0
+fp_inv,115200,60,-99.95
+fp_mul,160,180,12.5
+fp_sqr,160,180,12.5
+fp_sub,40,60,50.0
+fp_toM,160,180,12.5

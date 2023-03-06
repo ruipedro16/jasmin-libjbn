@@ -1,0 +1,9 @@
+Function,Protected
+fp_add, 60
+fp_expm_noct, 60
+fp_fromM, 140
+fp_inv, 60
+fp_mul, 180
+fp_sqr, 180
+fp_sub, 60
+fp_toM, 180
