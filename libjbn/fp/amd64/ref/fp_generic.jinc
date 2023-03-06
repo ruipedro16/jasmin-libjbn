@@ -174,9 +174,7 @@ fn _fp_exp(reg ptr u64[NLIMBS] a _b r) -> reg ptr u64[NLIMBS] {
     stack ptr u64[NLIMBS] rr bb;
     reg ptr u64[NLIMBS] b;
     reg ptr u64[NLIMBS] glob_oneMp;
-
     reg bool cond;
-    #msf reg u64 ms;
 
     x = _x;
     glob_oneMp = glob_oneM;
@@ -189,19 +187,14 @@ fn _fp_exp(reg ptr u64[NLIMBS] a _b r) -> reg ptr u64[NLIMBS] {
     bb = _b;
     rr = r;
     
-    ms = #init_msf(); // calls destroy msf variables
     for j = 0 to NLIMBS {
         b = bb;
         t = b[(int) j];
         k = 64;
-        /*
-        while { cond = (k != 0); } (cond) {
-            ss = k;
-
-            
+        while (k != 0) {
+            ss = k; 
             _, cf, _, _, _, t = #SHR(t, 1);
-            if (cf) {
-                ms = #set_msf(cf, ms);
+            #inline if (cf) { // cf is secret 
                 r = rr;
                 x = _x; //w
                 r = _fp_mulU(r, x);
@@ -214,14 +207,13 @@ fn _fp_exp(reg ptr u64[NLIMBS] a _b r) -> reg ptr u64[NLIMBS] {
             k = ss;
             k -= 1;
         }
-        */
     }
     r = rr;
     return r;
 }
 
 /* Modular Inversion */
-inline fn __fp_inv(reg ptr u64[NLIMBS] a r ) -> reg ptr u64[NLIMBS] {
+inline fn __fp_inv(reg ptr u64[NLIMBS] a r) -> reg ptr u64[NLIMBS] {
   /* a^{p-2} */
   reg ptr u64[NLIMBS] glob_pm2p;
   glob_pm2p = glob_pm2;

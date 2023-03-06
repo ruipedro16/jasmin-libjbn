@@ -2,7 +2,7 @@ Function,Unprotected
 fp_add, 40
 fp_expm_noct, 66700
 fp_fromM, 100
-fp_inv, 115200
+fp_inv, 115220
 fp_mul, 160
 fp_sqr, 160
 fp_sub, 40
